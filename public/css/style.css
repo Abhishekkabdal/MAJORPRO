@@ -39,8 +39,17 @@ body {
     align-items: center;
     justify-content: center;
 }
+.custom-size {
+    font-size: 25px;
+}
+.fa-brands {
+    margin: 4px;
+    opacity: 0.6;
+}
 
-
+.fa-brands:hover {
+  opacity: 1;
+}
 
 .f-info-socials i {
     font-size: 1.2rem;
@@ -111,3 +120,4 @@ body {
     padding-right: 0;
 
 }
+
