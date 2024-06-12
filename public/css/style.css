@@ -12,6 +12,9 @@ body {
 
 }
 
+
+
+
 .fa-compass {
     color: #fe424d;
     font-size:2rem;
@@ -121,3 +124,22 @@ body {
 
 }
 
+@media screen and (max-width: 600px) {
+    li.nav-item{
+        width: 406.4px;
+        height: 40px;
+    }
+    a.nav-link{
+        background-color: whitesmoke;
+    }
+    ul.navbar-nav{
+        background-color: whitesmoke;
+        width: 406.4px;
+        height: 40px;
+    }
+    .card-img-top {
+        border-radius: 1rem !important;
+        width: 120% !important;
+        object-fit: cover !important;
+    }
+}

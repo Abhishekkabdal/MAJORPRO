@@ -47,11 +47,11 @@ async function main() {
 //------------------------------------------------------------------------------------------
 
 app.set("view engine", "ejs");//templating & rendering
-app.set("views",path.join(__dirname,"views"));//joining path
+app.set("views",path.join(__dirname,"views"));//joining path/////////////
 app.use(express.urlencoded({ extended: true}));
 app.use(methodOverride("_method"));//diffrent request's handle
 app.engine("ejs",ejsMate);
-app.use(express.static(path.join(__dirname,"/public")));
+app.use(express.static(path.join(__dirname,"/public")));////////////////////
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
@@ -84,7 +84,7 @@ const sessionOptions = {
 
 
 
-app.use(session(sessionOptions));
+app.use(session(sessionOptions));//
 app.use(flash());
 
 app.use(passport.initialize());
@@ -138,3 +138,4 @@ app.use((err, req, res, next) => {
 app.listen(8080,() => {
     console.log("server is listening on port 8080");
 });
+//navbar-nav ms-auto
