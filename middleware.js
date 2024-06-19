@@ -3,7 +3,7 @@ const Review = require("./models/review")
 const ExpressError = require("./utills/ExpressError.js");  
 const { listingSchema,reviewSchema} = require("./schema.js");
 
-module.exports.isLoggedIn = (req, res, next) => {
+module.exports.isLoggedIn = (req, res, next) => {//
   console.log(req.path,"..",req.originalUrl);
     if(!req.isAuthenticated()) {
         req.session.redirectUrl = req.originalUrl;
@@ -21,7 +21,7 @@ module.exports.saveRedirectUrl = (req, res, next) => {
   next();
 };
 
-module.exports.isOwner = async(req, res, next) => {
+module.exports.isOwner = async(req, res, next) => {//
   
   let { id } = req.params;
   let listing = await Listing.findById(id);
@@ -34,7 +34,7 @@ module.exports.isOwner = async(req, res, next) => {
 }
 
 
-module.exports.validateListing = (req, res, next) => {
+module.exports.validateListing = (req, res, next) => {//
   let {error} = listingSchema.validate(req.body);
     
   if (error) {

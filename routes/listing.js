@@ -5,9 +5,9 @@ const wrapAsync = require("../utills/wrapAsync.js");
 const Listing = require("../models/listing.js");//  ./ MEANS LOKKING IN SAME DIRECTORY WHILE ../ MEANS LOKING CURRENT'S PARENT DIRECTORY
 const {isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 const listingController = require("../controllers/listings.js");
-const multer  = require('multer');
+const multer  = require('multer');//middlewear used in file uploading
 const {storage} = require("../cloudConfig.js");
-const upload = multer({storage });
+const upload = multer({storage});
 
 
 
@@ -20,7 +20,7 @@ router.route("/")
   .get(wrapAsync(listingController.index))
   .post(isLoggedIn, upload.single("listing[image]"), validateListing,wrapAsync(listingController.createListing)
  );
-  
+      
 
 
   

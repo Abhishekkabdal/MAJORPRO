@@ -15,12 +15,12 @@ const wrapAsync = require("./utills/wrapAsync.js");
 const ExpressError = require("./utills/ExpressError.js");
 const { listingSchema, reviewSchema } = require("./schema.js");//Files with grey text like this one,Listing ,wrapAsync are not bring used here .
 const Review = require("./models/review.js");
-const session = require("express-session");
-const MongoStore = require('connect-mongo');
-const flash = require("connect-flash"); 
-const passport = require("passport");
-const LocalStrategy  = require("passport-local");
-const User = require("./models/user.js");
+const session = require("express-session");//used to create and manage user sessions in Express.js applications. Sessions store user data (like login status) between requests.
+const MongoStore = require('connect-mongo');//
+const flash = require("connect-flash"); //temporary message
+const passport = require("passport");//popular middleware is a powerful tool for authentication in Node.js applications
+const LocalStrategy  = require("passport-local");//handles the process of verifying a user's credentials (username and password) against a data source, typically a database like MongoDB.
+const User = require("./models/user.js");//
 
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
@@ -37,7 +37,7 @@ main()
   .then(() => {
     console.log("connected to DB");
   })
-  .catch((err) => {
+  .catch((err) => {//
     console.log(err);
   });
 
@@ -48,24 +48,27 @@ async function main() {
 
 app.set("view engine", "ejs");//templating & rendering
 app.set("views",path.join(__dirname,"views"));//joining path/////////////
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true}));//A middlewear parsing data into server's understandable format
 app.use(methodOverride("_method"));//diffrent request's handle
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));////////////////////
+
+
+// store session data in mongoDB database like login credentials which will not lost after you reload pages.
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   crypto: {
     secret: process.env.SECRET,
   },
-  touchAfter: 24 * 3600,
+  touchAfter: 24 * 3600, 
 });
 
 
 store.on("error", () => {
   console.log("ERROR IN MONGO SESSION STORE", err);
 });
-
+//---------------------------------------------------------
 
 const sessionOptions = {
   store,
@@ -78,21 +81,24 @@ const sessionOptions = {
     httpOnly: true,
   },
 };
+//---------------------------------------------------
 
 
 
 
 
+app.use(session(sessionOptions));//maintain sessions
+app.use(flash());//flash message
 
-app.use(session(sessionOptions));//
-app.use(flash());
-
+// this 3 middlewear used in authentication
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 
+//store data in dbs in particular sequence
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 
 
 app.use((req, res, next) => {
@@ -132,7 +138,7 @@ app.use((err, req, res, next) => {
   let { statusCode=500, message="something went wrong!" } =  err;
   res.status(statusCode).render("error.ejs",{ message });
   //res.status(statusCode).send(message); 
-
+  
 });
 
 app.listen(8080,() => {

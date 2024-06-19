@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Review = require("./review.js");
-const { object } = require("joi");
+const { object } = require("joi");//popular js library for data validation
 
 const listingSchema = new Schema({
     title: {
@@ -33,8 +33,6 @@ const listingSchema = new Schema({
 listingSchema.post("findOneAndDelete", async (listing) => {
     if(listing) {
         await Review.deleteMany({_id : {$in: listing.reviews}});
-
-
     }
 
 

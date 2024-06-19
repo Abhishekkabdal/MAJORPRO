@@ -60,7 +60,7 @@ const sampleListings = [
       country: "United States",
     },
     {
-      title: "Beachfront Paradise",
+      title: "Beachfront Paradise",//
       description:
         "Step out of your door onto the sandy beach. This beachfront condo offers the ultimate relaxation.",
       image: {
@@ -96,7 +96,7 @@ const sampleListings = [
       country: "United States",
     },
     {
-      title: "Ski-In/Ski-Out Chalet",
+      title: "Ski-In/Ski-Out Chalet",//
       description:
         "Hit the slopes right from your doorstep in this ski-in/ski-out chalet in the Swiss Alps.",
       image: {
@@ -264,7 +264,7 @@ const sampleListings = [
       country: "Greece",
     },
     {
-      title: "Eco-Friendly Treehouse Retreat",
+      title: "Eco-Friendly Treehouse Retreat",//
       description:
         "Stay in an eco-friendly treehouse nestled in the forest. It's the perfect escape for nature lovers.",
       image: {
